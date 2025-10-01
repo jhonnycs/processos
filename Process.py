@@ -1,10 +1,9 @@
 class Process:
-    def __init__(self, pid, arrival_time, burst_time):
+    def __init__(self, pid, arrival_time, burst_time, time_unit: None):
         self.pid = pid
+        self.time_unit = time_unit
         self.arrival_time = arrival_time
         self.burst_time = burst_time
-        
-        # valores que mudam na simulação
         self.remaining_time = burst_time
         self.start_time = None
         self.completion_time = None
