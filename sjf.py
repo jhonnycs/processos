@@ -6,42 +6,70 @@ def sjf(procs, context_switch_cost):
     ready_queue = []
     finished = []
     timeline = []
+
     current = None
-    remaining_burst = 0
-    last_finished_time = None
-    last_finished_pid = None
+    current_remaining = 0
 
-    while procs or ready_queue or current:
+    switching = False
+    switch_remaining = 0
+
+    while procs or ready_queue or current or switching:
+
         arriving = [p for p in procs if p.arrival_time == time]
-
         for p in arriving:
             ready_queue.append(p)
-
         procs = [p for p in procs if p.arrival_time > time]
 
-        if not current and ready_queue:
-            current = min(ready_queue, key=lambda x: x.burst_time)
-            ready_queue.remove(current)
-            remaining_burst = current.burst_time
 
+        if current is not None:
+            current_remaining -= 1
 
-            if last_finished_time == time and context_switch_cost > 0:
-                time += context_switch_cost
+            time += 1
 
-            start = time
-            timeline.append({"pid": current.pid, "start": start})
-
-        if current:
-            remaining_burst -= 1
-            if remaining_burst == 0:
-                end = time + 1
+            if current_remaining == 0:
+                end = time
                 timeline[-1]["end"] = end
                 finished.append(current)
                 current = None
-                last_finished_time = end
+
+
+                if ready_queue and context_switch_cost and context_switch_cost > 0:
+                    switching = True
+                    switch_remaining = context_switch_cost
+
+
+
+            continue
+
+
+        if switching:
+            switch_remaining -= 1
+            time += 1
+
+
+            if switch_remaining == 0:
+                switching = False
+                timeline[-1]["end"] = time  # fecha CS
+
+                if ready_queue:
+
+                    current = min(ready_queue, key=lambda x: x.burst_time)
+                    ready_queue.remove(current)
+                    current_remaining = current.burst_time
+                    timeline.append({"pid": current.pid, "start": time})
+            continue
+
+
+        if current is None and ready_queue:
+
+            current = min(ready_queue, key=lambda x: x.burst_time)
+            ready_queue.remove(current)
+            current_remaining = current.burst_time
+            timeline.append({"pid": current.pid, "start": time})
+            continue
+
 
         time += 1
 
+
     return timeline
-
-
