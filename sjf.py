@@ -7,7 +7,7 @@ def sjf(procs, context_switch_cost):
     time = 0
     ready_queue = []
     finished = []
-    timeline = Timeline()
+    timeline = Timeline("SJF")
 
     current = None
     current_remaining = 0

@@ -1,16 +1,28 @@
 import json
 from Process import Process
 
-with open("a.json", "r", encoding="utf-8") as f:
-    dados = json.load(f)
+class JsonData:
+    def __init__(self, json_name: str):
+        """Carrega os dados do JSON no momento da criação do objeto."""
+        self.json_name = json_name
+        with open(f"json/{json_name}", "r", encoding="utf-8") as f:
+            dados = json.load(f)
 
-def load_processes():
-    processes: list[Process] = []
+        self.context_switch_cost: int = dados["metadata"]["context_switch_cost"]
+        self.throughput_window_T = dados["metadata"]["throughput_window_T"]
+        self.rr_quantums: list[int] = dados["metadata"]["rr_quantums"]
 
-    for process in dados["workload"]["processes"]:
-        processes.append(Process(process["pid"], process["arrival_time"], process["burst_time"], dados["workload"]["time_unit"]))
+        self.time_unit: str = dados["workload"]["time_unit"]
+        self.processes: list[Process] = [
+            Process(
+                p["pid"],
+                p["arrival_time"],
+                p["burst_time"],
+                self.time_unit,
+            )
+            for p in dados["workload"]["processes"]
+        ]
 
-    return processes
 
-def get_switch_cost() -> int:
-    return dados["metadata"]["context_switch_cost"]
+    def __repr__(self):
+        return self.json_name
