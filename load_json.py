@@ -5,7 +5,7 @@ class JsonData:
     def __init__(self, json_name: str):
         """Carrega os dados do JSON no momento da criação do objeto."""
         self.json_name = json_name
-        with open(f"json/{json_name}", "r", encoding="utf-8") as f:
+        with open(f"dataset/{json_name}", "r", encoding="utf-8") as f:
             dados = json.load(f)
 
         self.context_switch_cost: int = dados["metadata"]["context_switch_cost"]
