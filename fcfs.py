@@ -1,4 +1,5 @@
 import copy
+from collections import deque
 
 def add_to_timeline(timeline, pid, start, end):
     # timeline = lista de eventos [{start, end, pid}, ...]
@@ -10,26 +11,51 @@ def add_to_timeline(timeline, pid, start, end):
 
 
 def fcfs(processes, context_switch_cost):
-    timeline = [] # {"pid": "P01", "start": 0, "end": 5},
-    time = 0
+    procs = copy.deepcopy(processes)
+    procs.sort(key=lambda x: x.arrival_time)
 
-    processes.sort(key=lambda x: x.arrival_time)
+    clock = procs[0].arrival_time
+    lista_de_prontos = deque()
+    lista_de_espera = deque()
+    timeline = []
 
-    for i, p in enumerate(processes):
-        if time < p.arrival_time:
-            time = p.arrival_time
-    
-        if i > 0:
-            add_to_timeline(timeline, "CTX", time, time + context_switch_cost)
-            time += context_switch_cost
-    
+    # Inicializa a fila de espera
+    for proc in procs:
+        if proc.arrival_time <= clock:
+            lista_de_prontos.append(proc)
+        else:
+            lista_de_espera.append(proc)
 
-        if p.start_time is None:
-            p.start_time = time
-        
-        add_to_timeline(timeline, p.pid, time, time + p.burst_time)
-        time += p.burst_time
+    while lista_de_prontos or lista_de_espera:
 
-        p.completion_time = time
+        # Se não houver processo pronto, CPU fica ociosa até o próximo
+        if not lista_de_prontos:
+            next_arrival = lista_de_espera[0].arrival_time
+            add_to_timeline(timeline, "IDLE", clock, next_arrival)
+            clock = next_arrival
+            while lista_de_espera and lista_de_espera[0].arrival_time <= clock:
+                lista_de_prontos.append(lista_de_espera.popleft())
+            continue
+
+        # Pega o processo atual (o mais antigo que chegou)
+        current = lista_de_prontos.popleft()
+
+        # Adiciona troca de contexto se não for o primeiro
+        if timeline and timeline[-1]["pid"] != current.pid:
+            add_to_timeline(timeline, "CTX", clock, clock + context_switch_cost)
+            clock += context_switch_cost
+
+        # Define start_time se ainda não tiver
+        if current.start_time is None:
+            current.start_time = clock
+
+        # Executa o processo completamente
+        add_to_timeline(timeline, current.pid, clock, clock + current.burst_time)
+        clock += current.burst_time
+        current.completion_time = clock
+
+        # Checa chegada de novos processos durante a execução
+        while lista_de_espera and lista_de_espera[0].arrival_time <= clock:
+            lista_de_prontos.append(lista_de_espera.popleft())
 
     return timeline
