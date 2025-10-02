@@ -39,6 +39,14 @@ class Timeline:
 
         self.time_list.append(time_point)
 
+    def show_timeline(self):
+        for timepoint in self.time_list:
+            if timepoint.arrival is None:
+                print(f"pid: {timepoint.pid};  início: {timepoint.start};  fim: {timepoint.end}")
+            else:
+                print(f"pid: {timepoint.pid};  início: {timepoint.start};  fim: {timepoint.end};  chegada: {timepoint.arrival}")
+
+
     def plot_gantt_classic(self):
         fig, ax = plt.subplots(figsize=(10, 5))
 
@@ -94,4 +102,9 @@ class Timeline:
         ax.grid(axis="x", linestyle="--", alpha=0.5)
 
         plt.tight_layout()
+        if self.quantum:
+            plt.savefig(f"./graficos/{self.algorithm}-{self.quantum}")
+        else:
+            plt.savefig(f"./graficos/{self.algorithm}")
+
         plt.show()
