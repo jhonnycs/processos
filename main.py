@@ -4,7 +4,7 @@ from algorithms.round_robin import round_robin
 from load_json import JsonData
 from models.Metricas import Metricas
 
-a = JsonData("b.json")
+a = JsonData("a.json")
 metricas = Metricas()
 
 results_fcfs = fcfs(a.processes, a.context_switch_cost)
@@ -25,9 +25,9 @@ metricas.plot_tempos_espera()
 metricas.plot_tempos_retorno()
 metricas.plot_vazao()
 
-# results_fcfs.plot_gantt_classic()
-# results_sjf.plot_gantt_classic()
+results_fcfs.plot_gantt_classic()
+results_sjf.plot_gantt_classic()
 
-# for result in results_rr:
-#     result.plot_gantt_classic()
+for result in results_rr:
+    result.plot_gantt_classic()
 
