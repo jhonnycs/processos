@@ -1,9 +1,8 @@
-
-from fcfs import fcfs
-from sjf import sjf
-from round_robin import round_robin
+from algorithms.fcfs import fcfs
+from algorithms.sjf import sjf
+from algorithms.round_robin import round_robin
 from load_json import JsonData
-from calc_metricas import Metricas
+from models.Metricas import Metricas
 
 a = JsonData("b.json")
 metricas = Metricas()
@@ -31,6 +30,4 @@ metricas.plot_vazao()
 
 # for result in results_rr:
 #     result.plot_gantt_classic()
-
-
 

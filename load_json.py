@@ -1,5 +1,5 @@
 import json
-from Process import Process
+from models.Process import Process
 
 class JsonData:
     def __init__(self, json_name: str):

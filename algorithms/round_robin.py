@@ -1,11 +1,13 @@
 import copy
-from Process import Process
+from models.Process import Process
 from collections import deque
-from Timeline import Timepoint
-from Timeline import Timeline
+from models.Timeline import Timepoint
+from models.Timeline import Timeline
+
 
 def ja_passou_o_quantum(clock, quantum):
     return clock == quantum
+
 
 def round_robin(processes: list[Process], context_switch_cost, quantum):
     procs = copy.deepcopy(processes)
@@ -24,7 +26,6 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
 
     quantum_count = 0
     timeline = Timeline("RR", quantum=quantum)
-    
     while lista_de_prontos or lista_de_espera:
         if not lista_de_prontos:
             next_arrival = lista_de_espera[0].arrival_time
@@ -37,7 +38,7 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
 
         current = lista_de_prontos[0]
         current.remaining_time -= 1
-        timeline.add_to_timeline(Timepoint(current.pid, clock, clock+1, current.arrival_time))
+        timeline.add_to_timeline(Timepoint(current.pid, clock, clock + 1, current.arrival_time))
         clock += 1
         quantum_count += 1
 
