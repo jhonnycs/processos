@@ -1,3 +1,5 @@
+from Timeline import Timeline
+from Timeline import Timepoint
 
 def sjf(procs, context_switch_cost):
     procs = sorted(procs, key=lambda x: x.arrival_time)
@@ -5,7 +7,7 @@ def sjf(procs, context_switch_cost):
     time = 0
     ready_queue = []
     finished = []
-    timeline = []
+    timeline = Timeline()
 
     current = None
     current_remaining = 0
@@ -28,7 +30,7 @@ def sjf(procs, context_switch_cost):
 
             if current_remaining == 0:
                 end = time
-                timeline[-1]["end"] = end
+                timeline.get_last_timepoint().end = end
                 finished.append(current)
                 current = None
 
@@ -49,14 +51,14 @@ def sjf(procs, context_switch_cost):
 
             if switch_remaining == 0:
                 switching = False
-                timeline[-1]["end"] = time  # fecha CS
+                timeline.get_last_timepoint().end = time  # fecha CS
 
                 if ready_queue:
 
                     current = min(ready_queue, key=lambda x: x.burst_time)
                     ready_queue.remove(current)
                     current_remaining = current.burst_time
-                    timeline.append({"pid": current.pid, "start": time})
+                    timeline.add_to_timeline(Timepoint(current.pid, time,  None))
             continue
 
 
@@ -65,7 +67,7 @@ def sjf(procs, context_switch_cost):
             current = min(ready_queue, key=lambda x: x.burst_time)
             ready_queue.remove(current)
             current_remaining = current.burst_time
-            timeline.append({"pid": current.pid, "start": time})
+            timeline.add_to_timeline(Timepoint(current.pid, time,  None))
             continue
 
 
