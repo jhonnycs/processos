@@ -7,7 +7,6 @@ from Timeline import Timeline
 def ja_passou_o_quantum(clock, quantum):
     return clock == quantum
 
-
 def round_robin(processes: list[Process], context_switch_cost, quantum):
     procs = copy.deepcopy(processes)
 
@@ -36,18 +35,15 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
             quantum_count = 0
             continue
 
-        # Executa o processo atual
         current = lista_de_prontos[0]
         current.remaining_time -= 1
         timeline.add_to_timeline(Timepoint(current.pid, clock, clock+1))
         clock += 1
         quantum_count += 1
 
-        # será que chegou processo novo
         while lista_de_espera and lista_de_espera[0].arrival_time <= clock:
             lista_de_prontos.append(lista_de_espera.popleft())
 
-        # Processo terminou
         if current.remaining_time == 0:
             current.completion_time = clock
             lista_de_prontos.popleft()
@@ -56,7 +52,6 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
                 timeline.add_to_timeline(Timepoint("CTX", clock - context_switch_cost, clock))
             quantum_count = 0
 
-        # Quantum estourou
         elif quantum_count >= quantum:
             lista_de_prontos.append(lista_de_prontos.popleft())
             clock += context_switch_cost
