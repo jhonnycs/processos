@@ -1,0 +1,21 @@
+{
+  "spec_version": "1.0",
+  "challenge_id": "rr_fcfs_sjf_demo_var4",
+  "metadata": {
+    "context_switch_cost": 0,
+    "throughput_window_T": 200,
+    "algorithms": ["FCFS", "SJF", "RR"],
+    "rr_quantums": [10, 20, 30]
+  },
+  "workload": {
+    "time_unit": "ticks",
+    "processes": [
+      { "pid": "P01", "arrival_time": 0, "burst_time": 22 },
+      { "pid": "P02", "arrival_time": 3, "burst_time": 14 },
+      { "pid": "P03", "arrival_time": 4, "burst_time": 35 },
+      { "pid": "P04", "arrival_time": 9, "burst_time": 8 },
+      { "pid": "P05", "arrival_time": 12, "burst_time": 40 },
+      { "pid": "P06", "arrival_time": 16, "burst_time": 11 }
+    ]
+  }
+}
