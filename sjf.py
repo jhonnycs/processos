@@ -8,6 +8,8 @@ def sjf(procs, context_switch_cost):
     timeline = []
     current = None
     remaining_burst = 0
+    last_finished_time = None
+    last_finished_pid = None
 
     while procs or ready_queue or current:
         arriving = [p for p in procs if p.arrival_time == time]
@@ -21,6 +23,11 @@ def sjf(procs, context_switch_cost):
             current = min(ready_queue, key=lambda x: x.burst_time)
             ready_queue.remove(current)
             remaining_burst = current.burst_time
+
+
+            if last_finished_time == time and context_switch_cost > 0:
+                time += context_switch_cost
+
             start = time
             timeline.append({"pid": current.pid, "start": start})
 
@@ -31,6 +38,7 @@ def sjf(procs, context_switch_cost):
                 timeline[-1]["end"] = end
                 finished.append(current)
                 current = None
+                last_finished_time = end
 
         time += 1
 
