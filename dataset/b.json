@@ -1,0 +1,17 @@
+{
+    "spec_version": "1.0",
+    "challenge_id": "rr_fcfs_sjf_demo_1",
+    "metadata": {
+        "context_switch_cost": 2,
+        "throughput_window_T": 50,
+        "algorithms": ["FCFS", "SJF", "RR"],
+        "rr_quantums": [1,2,3,4,5]
+    }, 
+    "workload": {
+        "time_unit": "ticks",
+        "processes": [
+            {"pid": "P01", "arrival_time": 0, "burst_time": 5},
+            {"pid": "P02", "arrival_time": 10, "burst_time": 5}
+	]
+    }
+}

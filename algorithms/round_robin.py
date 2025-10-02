@@ -26,7 +26,6 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
 
     quantum_count = 0
     timeline = Timeline("RR", quantum=quantum)
-
     while lista_de_prontos or lista_de_espera:
         if not lista_de_prontos:
             next_arrival = lista_de_espera[0].arrival_time

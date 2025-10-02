@@ -1,4 +1,3 @@
-
 from algorithms.fcfs import fcfs
 from algorithms.sjf import sjf
 from algorithms.round_robin import round_robin
@@ -31,3 +30,4 @@ metricas.plot_vazao()
 
 # for result in results_rr:
 #     result.plot_gantt_classic()
+
