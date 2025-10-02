@@ -1,7 +1,7 @@
 import json
-from Process import Process
+from models.Process import Process
 
-with open("a.json", "r", encoding="utf-8") as f:
+with open("dataset/a.json", "r", encoding="utf-8") as f:
     dados = json.load(f)
 
 def load_processes():

@@ -1,7 +1,7 @@
 import copy
 from collections import deque
-from Timeline import Timeline
-from Timeline import Timepoint
+from models.Timeline import Timeline
+from models.Timeline import Timepoint
 
 def fcfs(processes, context_switch_cost):
     procs = copy.deepcopy(processes)

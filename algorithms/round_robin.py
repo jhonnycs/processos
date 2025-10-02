@@ -1,8 +1,8 @@
 import copy
-from Process import Process
+from models.Process import Process
 from collections import deque
-from Timeline import Timepoint
-from Timeline import Timeline
+from models.Timeline import Timepoint
+from models.Timeline import Timeline
 
 def ja_passou_o_quantum(clock, quantum):
     return clock == quantum
