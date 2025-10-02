@@ -10,15 +10,12 @@ def add_to_timeline(timeline, pid, start, end):
 
 
 def fcfs(processes, context_switch_cost):
-    procs = copy.deepcopy(processes)
-
     timeline = [] # {"pid": "P01", "start": 0, "end": 5},
     time = 0
 
-    procs.sort(key=lambda x: x.arrival_time)
+    processes.sort(key=lambda x: x.arrival_time)
 
-    for i, p in enumerate(procs):
-    # se o processo ainda não chegou, avança o relógio
+    for i, p in enumerate(processes):
         if time < p.arrival_time:
             time = p.arrival_time
     
@@ -35,4 +32,4 @@ def fcfs(processes, context_switch_cost):
 
         p.completion_time = time
 
-    return timeline, procs
+    return timeline
