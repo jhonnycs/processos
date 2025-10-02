@@ -1,5 +1,5 @@
-from Timeline import Timeline
-from Timeline import Timepoint
+from models.Timeline import Timeline
+from models.Timeline import Timepoint
 
 def sjf(procs, context_switch_cost):
     procs = sorted(procs, key=lambda x: x.arrival_time)
