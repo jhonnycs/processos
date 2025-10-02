@@ -8,7 +8,7 @@ def load_processes():
     processes: list[Process] = []
 
     for process in dados["workload"]["processes"]:
-        processes.append(Process(process["pid"], process["arrival_time"], process["burst_time"]))
+        processes.append(Process(process["pid"], process["arrival_time"], process["burst_time"], dados["workload"]["time_unit"]))
 
     return processes
 
