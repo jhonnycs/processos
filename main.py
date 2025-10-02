@@ -2,25 +2,32 @@
 from algorithms.fcfs import fcfs
 from algorithms.sjf import sjf
 from algorithms.round_robin import round_robin
-from load_json import load_processes, get_switch_cost
+from load_json import JsonData
 from models.Metricas import Metricas
 
-processes = load_processes()
-context_switch_cost = get_switch_cost()
+a = JsonData("b.json")
+metricas = Metricas()
 
-results_fcfs = fcfs(processes, context_switch_cost)
-results_sjf = sjf(processes, context_switch_cost)
-print(results_sjf)
-results_rr = round_robin(processes, context_switch_cost, 2)
+results_fcfs = fcfs(a.processes, a.context_switch_cost)
+results_sjf = sjf(a.processes, a.context_switch_cost)
 
-metricas_sjf = Metricas(results_sjf)
-print("Métricas SJF:", metricas_sjf.to_dict())
+metricas.adicionar("FCFS" ,results_fcfs)
+metricas.adicionar("SJF",results_sjf)
 
-# Plots (aparecerão em jupyter/ambiente gráfico)
-metricas_sjf.plot_tempos()       # mostra gráfico
-metricas_sjf.plot_vazao()        # mostra gráfico
-metricas_sjf.plot_timeline()     # mostra timeline
+results_rr = []
+for q in a.rr_quantums:
+    results_rr.append(round_robin(a.processes, a.context_switch_cost, q))
 
-# Se estiver rodando em servidor sem display, salve em arquivo:
-metricas_sjf.plot_timeline()
-metricas_sjf.plot_tempos()
+
+for result in results_rr:
+    metricas.adicionar(f"RR - {result.quantum}", result)
+
+metricas.plot_tempos_espera()
+metricas.plot_tempos_retorno()
+metricas.plot_vazao()
+
+# results_fcfs.plot_gantt_classic()
+# results_sjf.plot_gantt_classic()
+
+# for result in results_rr:
+#     result.plot_gantt_classic()
