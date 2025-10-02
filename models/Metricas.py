@@ -62,14 +62,14 @@ class Metricas:
         plt.title("Tempos de Espera e Retorno por Processo")
         plt.legend()
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def plot_vazao(self):
         plt.figure(figsize=(6,4))
         plt.bar(["Vazão"], [self.vazao])
         plt.ylabel("Processos por unidade de tempo")
         plt.title("Vazão")
-        plt.show()
+        # plt.show()
 
     def plot_timeline(self):
         plt.figure(figsize=(12, len(self.pids)*0.5 + 1))
@@ -82,4 +82,4 @@ class Metricas:
         plt.ylabel("PID")
         plt.title("Linha do Tempo (Timeline) dos Processos")
         plt.grid(True)
-        plt.show()
+        # plt.show()

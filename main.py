@@ -22,5 +22,5 @@ metricas_sjf.plot_vazao()        # mostra gráfico
 metricas_sjf.plot_timeline()     # mostra timeline
 
 # Se estiver rodando em servidor sem display, salve em arquivo:
-metricas_sjf.plot_timeline(show=False, save_path="timeline_sjf.png")
-metricas_sjf.plot_tempos(show=False, save_path="tempos_sjf.png")
+metricas_sjf.plot_timeline()
+metricas_sjf.plot_tempos()
