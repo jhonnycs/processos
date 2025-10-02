@@ -9,4 +9,4 @@ context_switch_cost = get_switch_cost()
 
 results_fcfs = fcfs(processes, context_switch_cost)
 results_sjf = sjf(processes, context_switch_cost)
-results_rr = round_robin(processes, context_switch_cost)
+results_rr = round_robin(processes, context_switch_cost, 2)
