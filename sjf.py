@@ -1,4 +1,3 @@
-from Process import Process
 
 def sjf(procs, context_switch_cost):
     procs = sorted(procs, key=lambda x: x.arrival_time)
@@ -35,7 +34,6 @@ def sjf(procs, context_switch_cost):
 
         time += 1
 
-    print("Timeline:", timeline)
     return timeline
 
 
