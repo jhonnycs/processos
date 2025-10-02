@@ -25,9 +25,9 @@ for result in results_rr:
 # metricas.plot_tempos_retorno()
 # metricas.plot_vazao()
 
-# results_fcfs.plot_gantt_classic()
+results_fcfs.plot_gantt_classic()
 # results_sjf.plot_gantt_classic()
-results_fcfs.show_timeline()
+#results_fcfs.show_timeline()
 
 # for result in results_rr:
 #     result.plot_gantt_classic()

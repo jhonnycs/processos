@@ -102,4 +102,9 @@ class Timeline:
         ax.grid(axis="x", linestyle="--", alpha=0.5)
 
         plt.tight_layout()
+        if self.quantum:
+            plt.savefig(f"./graficos/{self.algorithm}-{self.quantum}")
+        else:
+            plt.savefig(f"./graficos/{self.algorithm}")
+
         plt.show()
