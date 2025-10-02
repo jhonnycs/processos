@@ -30,7 +30,7 @@ def fcfs(processes, context_switch_cost):
 
         current = lista_de_prontos.popleft()
 
-        if timeline and timeline.get_last_timepoint.pid != current.pid:
+        if timeline.time_list and timeline.get_last_timepoint().pid != current.pid:
             timeline.add_to_timeline(Timepoint("CTX", clock, clock + context_switch_cost))
             clock += context_switch_cost
 
