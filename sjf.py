@@ -34,24 +34,19 @@ def sjf(procs, context_switch_cost):
                 finished.append(current)
                 current = None
 
-
                 if ready_queue and context_switch_cost and context_switch_cost > 0:
                     switching = True
                     switch_remaining = context_switch_cost
 
-
-
             continue
-
 
         if switching:
             switch_remaining -= 1
             time += 1
 
-
             if switch_remaining == 0:
                 switching = False
-                timeline.get_last_timepoint().end = time  # fecha CS
+                timeline.get_last_timepoint().end = time
 
                 if ready_queue:
 
@@ -61,7 +56,6 @@ def sjf(procs, context_switch_cost):
                     timeline.add_to_timeline(Timepoint(current.pid, time,  None))
             continue
 
-
         if current is None and ready_queue:
 
             current = min(ready_queue, key=lambda x: x.burst_time)
@@ -69,7 +63,6 @@ def sjf(procs, context_switch_cost):
             current_remaining = current.burst_time
             timeline.add_to_timeline(Timepoint(current.pid, time,  None))
             continue
-
 
         time += 1
 
