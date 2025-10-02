@@ -48,17 +48,21 @@ def round_robin(processes: list[Process], context_switch_cost, quantum):
         if current.remaining_time == 0:
             current.completion_time = clock
             lista_de_prontos.popleft()
-            if lista_de_prontos:  # troca de contexto apenas se houver próximo
+
+            if lista_de_prontos:
                 clock += context_switch_cost
                 timeline.add_to_timeline(Timepoint("CTX", clock - context_switch_cost, clock))
-            quantum_count = 0
 
+            quantum_count = 0
 
         elif quantum_count >= quantum:
-            lista_de_prontos.append(lista_de_prontos.popleft())
-            clock += context_switch_cost
-            timeline.add_to_timeline(Timepoint("CTX", clock - context_switch_cost, clock))
-            quantum_count = 0
+            if len(lista_de_prontos) > 1:
+                lista_de_prontos.append(lista_de_prontos.popleft())
+                clock += context_switch_cost
+                timeline.add_to_timeline(Timepoint("CTX", clock - context_switch_cost, clock))
+                quantum_count = 0
+            else:
+                quantum_count = 0
 
 
     return timeline
