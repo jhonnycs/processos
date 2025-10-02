@@ -8,24 +8,21 @@ def sjf(procs, context_switch_cost):
     ready_queue = []
     finished = []
     timeline = Timeline()
-
     current = None
     current_remaining = 0
-
     switching = False
     switch_remaining = 0
 
     while procs or ready_queue or current or switching:
-
         arriving = [p for p in procs if p.arrival_time == time]
+
         for p in arriving:
             ready_queue.append(p)
-        procs = [p for p in procs if p.arrival_time > time]
 
+        procs = [p for p in procs if p.arrival_time > time]
 
         if current is not None:
             current_remaining -= 1
-
             time += 1
 
             if current_remaining == 0:
@@ -49,15 +46,14 @@ def sjf(procs, context_switch_cost):
                 timeline.get_last_timepoint().end = time
 
                 if ready_queue:
-
                     current = min(ready_queue, key=lambda x: x.burst_time)
                     ready_queue.remove(current)
                     current_remaining = current.burst_time
                     timeline.add_to_timeline(Timepoint(current.pid, time,  None))
+
             continue
 
         if current is None and ready_queue:
-
             current = min(ready_queue, key=lambda x: x.burst_time)
             ready_queue.remove(current)
             current_remaining = current.burst_time
@@ -65,6 +61,5 @@ def sjf(procs, context_switch_cost):
             continue
 
         time += 1
-
 
     return timeline
