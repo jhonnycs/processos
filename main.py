@@ -32,7 +32,7 @@ def main(json):
     metricas.plot_vazao()
     metricas.plot_todos()
 
-main("c.json")
+main("f.json")
 #main("d.json")
 # main("e.json")
 # main("f.json")
