@@ -1,18 +1,35 @@
 {
   "spec_version": "1.0",
-  "challenge_id": "demo_high_ctx_cost_and_idle",
+  "challenge_id": "heavy_load_varied",
   "metadata": {
-    "context_switch_cost": 5,
-    "throughput_window_T": 100,
+    "context_switch_cost": 1,
+    "throughput_window_T": 40,
     "algorithms": ["FCFS", "SJF", "RR"],
-    "rr_quantums": [1, 2, 8]
+    "rr_quantums": [2, 6, 12]
   },
   "workload": {
     "time_unit": "ticks",
     "processes": [
-      { "pid": "P1", "arrival_time": 0,  "burst_time": 6 },
-      { "pid": "P2", "arrival_time": 20, "burst_time": 4 },
-      { "pid": "P3", "arrival_time": 40, "burst_time": 3 }
+      { "pid": "P01", "arrival_time": 0, "burst_time": 5 },
+      { "pid": "P02", "arrival_time": 1, "burst_time": 8 },
+      { "pid": "P03", "arrival_time": 1, "burst_time": 1 },
+      { "pid": "P04", "arrival_time": 2, "burst_time": 3 },
+      { "pid": "P05", "arrival_time": 3, "burst_time": 6 },
+      { "pid": "P06", "arrival_time": 4, "burst_time": 2 },
+      { "pid": "P07", "arrival_time": 5, "burst_time": 7 },
+      { "pid": "P08", "arrival_time": 5, "burst_time": 4 },
+      { "pid": "P09", "arrival_time": 6, "burst_time": 9 },
+      { "pid": "P10", "arrival_time": 7, "burst_time": 2 },
+      { "pid": "P11", "arrival_time": 8, "burst_time": 3 },
+      { "pid": "P12", "arrival_time": 9, "burst_time": 10 },
+      { "pid": "P13", "arrival_time": 10, "burst_time": 2 },
+      { "pid": "P14", "arrival_time": 11, "burst_time": 1 },
+      { "pid": "P15", "arrival_time": 12, "burst_time": 5 },
+      { "pid": "P16", "arrival_time": 12, "burst_time": 8 },
+      { "pid": "P17", "arrival_time": 13, "burst_time": 4 },
+      { "pid": "P18", "arrival_time": 14, "burst_time": 6 },
+      { "pid": "P19", "arrival_time": 15, "burst_time": 3 },
+      { "pid": "P20", "arrival_time": 16, "burst_time": 7 }
     ]
   }
 }

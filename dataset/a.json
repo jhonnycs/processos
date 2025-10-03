@@ -1,6 +1,6 @@
 {
   "spec_version": "1.0",
-  "challenge_id": " rr_fcfs_sjf_demo",
+  "challenge_id": "homogeneous_short",
   "metadata": {
     "context_switch_cost": 1,
     "throughput_window_T": 100,
@@ -10,11 +10,14 @@
   "workload": {
     "time_unit": "ticks",
     "processes": [
-      { "pid": "P01", "arrival_time": 0, "burst_time": 5 },
-      { "pid": "P02", "arrival_time": 1, "burst_time": 17 },
-      { "pid": "P03", "arrival_time": 2, "burst_time": 3 },
-      { "pid": "P04", "arrival_time": 4, "burst_time": 22 },
-      { "pid": "P05", "arrival_time": 6, "burst_time": 7 }
+      { "pid": "P01", "arrival_time": 0, "burst_time": 2 },
+      { "pid": "P02", "arrival_time": 1, "burst_time": 3 },
+      { "pid": "P03", "arrival_time": 2, "burst_time": 1 },
+      { "pid": "P04", "arrival_time": 3, "burst_time": 4 },
+      { "pid": "P05", "arrival_time": 4, "burst_time": 2 },
+      { "pid": "P06", "arrival_time": 5, "burst_time": 3 },
+      { "pid": "P07", "arrival_time": 6, "burst_time": 1 },
+      { "pid": "P08", "arrival_time": 7, "burst_time": 2 }
     ]
   }
 }

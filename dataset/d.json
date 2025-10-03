@@ -1,20 +1,23 @@
 {
   "spec_version": "1.0",
-  "challenge_id": "demo_rr_responsiveness",
+  "challenge_id": "spaced_interleaved_long_short",
   "metadata": {
-    "context_switch_cost": 1,
-    "throughput_window_T": 100,
+    "context_switch_cost": 3,
+    "throughput_window_T": 150,
     "algorithms": ["FCFS", "SJF", "RR"],
-    "rr_quantums": [1, 2, 4]
+    "rr_quantums": [3, 6, 9, 12]
   },
   "workload": {
     "time_unit": "ticks",
     "processes": [
-      { "pid": "UI1", "arrival_time": 0, "burst_time": 3 },
-      { "pid": "UI2", "arrival_time": 1, "burst_time": 2 },
-      { "pid": "Background", "arrival_time": 2, "burst_time": 20 },
-      { "pid": "UI3", "arrival_time": 4, "burst_time": 1 },
-      { "pid": "UI4", "arrival_time": 5, "burst_time": 2 }
+      { "pid": "P01", "arrival_time": 0, "burst_time": 30 },
+      { "pid": "P02", "arrival_time": 5, "burst_time": 2 },
+      { "pid": "P03", "arrival_time": 10, "burst_time": 3 },
+      { "pid": "P04", "arrival_time": 15, "burst_time": 1 },
+      { "pid": "P05", "arrival_time": 20, "burst_time": 25 },
+      { "pid": "P06", "arrival_time": 25, "burst_time": 2 },
+      { "pid": "P07", "arrival_time": 30, "burst_time": 4 },
+      { "pid": "P08", "arrival_time": 35, "burst_time": 1 }
     ]
   }
 }
