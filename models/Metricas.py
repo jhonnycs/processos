@@ -2,7 +2,6 @@ import statistics
 import matplotlib.pyplot as plt
 from models.Timeline import Timeline
 
-
 class Metrica:
     def __init__(self, nome_algoritmo, timeline, tempo_final=None, throughput_window_T=None):
         self.nome_algoritmo = nome_algoritmo
@@ -16,11 +15,6 @@ class Metrica:
         self.tempos_retorno = []
 
         self._calculate_metrics()
-
-        # Vazão: apenas Timepoints de processos válidos
-        # self.concluidos = sum(
-        #     1 for tp in self.timeline if tp.end <= self.tempo_vazao and tp.pid is not None and tp.arrival is not None)
-        # self.vazao = self.concluidos / self.tempo_vazao if self.tempo_vazao > 0 else 0
 
         completion_by_pid = {}
         for tp in self.timeline:
@@ -59,7 +53,6 @@ class Metrica:
             self.tempos_retorno.append(turnaround)
             self.tempos_espera.append(waiting)
 
-        # Estatísticas
         self.tempo_medio_espera = statistics.mean(self.tempos_espera) if self.tempos_espera else 0
         self.tempo_medio_retorno = statistics.mean(self.tempos_retorno) if self.tempos_retorno else 0
 
