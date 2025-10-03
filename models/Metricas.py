@@ -61,17 +61,13 @@ class Metrica:
 
         # Estatísticas
         self.tempo_medio_espera = statistics.mean(self.tempos_espera) if self.tempos_espera else 0
-        self.desvio_padrao_espera = statistics.pstdev(self.tempos_espera) if len(self.tempos_espera) > 1 else 0
         self.tempo_medio_retorno = statistics.mean(self.tempos_retorno) if self.tempos_retorno else 0
-        self.desvio_padrao_retorno = statistics.pstdev(self.tempos_retorno) if len(self.tempos_retorno) > 1 else 0
 
     def to_dict(self):
         return {
             "algoritmo": self.nome_algoritmo,
             "tempo_medio_espera": self.tempo_medio_espera,
-            "desvio_padrao_espera": self.desvio_padrao_espera,
             "tempo_medio_retorno": self.tempo_medio_retorno,
-            "desvio_padrao_retorno": self.desvio_padrao_retorno,
             "vazao": self.vazao
         }
     
@@ -80,8 +76,6 @@ class Metrica:
         print(self.nome_algoritmo)
         print(f"Tempo médio de espera: {self.tempo_medio_espera:.2f}")
         print(f"Tempo médio de retorno: {self.tempo_medio_retorno:.2f}")
-        print(f"Desvio padrão de espera: {self.desvio_padrao_espera:.2f}")
-        print(f"Desvio padrão de retorno: {self.desvio_padrao_retorno:.2f}")
         print(f"vazão: {self.vazao:.3f}\n")
 
 
