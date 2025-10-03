@@ -1,19 +1,23 @@
 {
   "spec_version": "1.0",
-  "challenge_id": "rr_fcfs_sjf_demo_var3",
+  "challenge_id": "demo_sjf_starvation",
   "metadata": {
-    "context_switch_cost": 3,
-    "throughput_window_T": 90,
-    "algorithms": ["FCFS", "SJF", "RR"],
-    "rr_quantums": [3, 6, 9, 12]
+    "context_switch_cost": 1,
+    "throughput_window_T": 300,
+    "algorithms": ["FCFS", "SJF", "SJF-preemptive", "RR"],
+    "rr_quantums": [2, 4]
   },
   "workload": {
     "time_unit": "ticks",
     "processes": [
-      { "pid": "P01", "arrival_time": 0, "burst_time": 12 },
-      { "pid": "P02", "arrival_time": 1, "burst_time": 4 },
-      { "pid": "P03", "arrival_time": 4, "burst_time": 9 },
-      { "pid": "P04", "arrival_time": 7, "burst_time": 19 }
+      { "pid": "Long", "arrival_time": 0, "burst_time": 30 },
+      { "pid": "Short1", "arrival_time": 1, "burst_time": 1 },
+      { "pid": "Short2", "arrival_time": 2, "burst_time": 1 },
+      { "pid": "Short3", "arrival_time": 3, "burst_time": 1 },
+      { "pid": "Short4", "arrival_time": 4, "burst_time": 1 },
+      { "pid": "Short5", "arrival_time": 5, "burst_time": 1 },
+      { "pid": "Short6", "arrival_time": 6, "burst_time": 1 },
+      { "pid": "Short7", "arrival_time": 7, "burst_time": 1 }
     ]
   }
 }

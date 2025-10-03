@@ -21,10 +21,17 @@ def main(json):
     for result in results_rr:
         metricas.adicionar(f"RR - {result.quantum}", result, throughput_window_T=a.throughput_window_T)
 
+    results_fcfs.plot_gantt_classic()
+    results_sjf.plot_gantt_classic()
+    for r in results_rr:
+        r.plot_gantt_classic()
+
     metricas.show_metricas_de_todos()
-    metricas.plot_todos()
+    metricas.plot_tempos_espera()
+    metricas.plot_tempos_retorno()
+    metricas.plot_vazao()
 
 main("c.json")
 #main("d.json")
 # main("e.json")
-# main("f.json")    
+# main("f.json")

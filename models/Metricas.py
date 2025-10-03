@@ -111,6 +111,7 @@ class Metricas:
         plt.title("Tempo Médio de Espera")
         plt.ylabel("Tempo")
         plt.xlabel("Algoritmos")
+        plt.savefig("./graficos/tempos_espera")
         plt.show()
 
     def plot_tempos_retorno(self):
