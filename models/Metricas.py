@@ -74,11 +74,20 @@ class Metrica:
             "desvio_padrao_retorno": self.desvio_padrao_retorno,
             "vazao": self.vazao
         }
+    
+    def show_metricas(self):
+        print("=================================")
+        print(self.nome_algoritmo)
+        print(f"Tempo médio de espera: {self.tempo_medio_espera:.2f}")
+        print(f"Tempo médio de retorno: {self.tempo_medio_retorno:.2f}")
+        print(f"Desvio padrão de espera: {self.desvio_padrao_espera:.2f}")
+        print(f"Desvio padrão de retorno: {self.desvio_padrao_retorno:.2f}")
+        print(f"vazão: {self.vazao:.3f}\n")
 
 
 class Metricas:
     def __init__(self):
-        self.metricas = []
+        self.metricas: list[Metrica] = []
 
     def adicionar(self, nome_algoritmo, timeline, tempo_final=None, throughput_window_T=None):
         metrica = Metrica(nome_algoritmo, timeline, tempo_final, throughput_window_T)
@@ -89,6 +98,10 @@ class Metricas:
 
     def to_dict(self):
         return {m.nome_algoritmo: m.to_dict() for m in self.metricas}
+
+    def show_metricas_de_todos(self):
+        for metrica in self.metricas:
+            metrica.show_metricas()
 
     def plot_tempos_espera(self):
         nomes = [m.nome_algoritmo for m in self.metricas]
