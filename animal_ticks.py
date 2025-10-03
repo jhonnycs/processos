@@ -1,7 +1,6 @@
 import json
 import time
 
-# Carrega configuração
 with open("config.json", "r") as f:
     config = json.load(f)
 
@@ -37,7 +36,6 @@ def can_enter(species):
 for a in animals:
     a["remaining_time"] = a["rest_duration"]
 
-print("=== Simulação Iniciada ===\n")
 waiting_list = []
 
 for tick in range(total_time + 1):
@@ -73,4 +71,4 @@ for tick in range(total_time + 1):
             update_state()
 
     time.sleep(0.5)
-print("\n=== Fim da Simulação ===")
+print("\n========= Fim =========")

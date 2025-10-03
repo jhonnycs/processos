@@ -5,7 +5,7 @@ from queue import Queue
 
 waiting_queue = Queue()
 
-with open("config.json", "r") as f:
+with open("processos/config.json", "r") as f:
     config = json.load(f)
 
 metadata = config["metadata"]
@@ -47,10 +47,10 @@ def animal_process(animal):
     # tempo de chegada
     time.sleep(animal["arrival_time"])
     waiting_queue.put(animal)
+    print("Chegou: ", animal['id'])
 
     while True:
         room_sem.acquire()
-    
         first_in_queue = waiting_queue.queue[0]
         if (current_state == "EMPTY" and first_in_queue["id"] == animal["id"]) \
            or (current_state == "DOGS" and animal["species"] == "DOG") \
@@ -90,4 +90,4 @@ for a in animals:
 for t in threads:
     t.join()
 
-print("\nFim da simulação")
+print("\n========= Fim =========")
