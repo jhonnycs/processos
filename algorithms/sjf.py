@@ -62,7 +62,7 @@ def sjf(procs, context_switch_cost):
                     current_remaining = current.burst_time
                     if getattr(current, "start_time", None) is None:
                         current.start_time = time
-                    timeline.add_to_timeline(Timepoint(current.pid, time, None))
+                    timeline.add_to_timeline(Timepoint(current.pid, time, time, current.arrival_time))
             continue
 
         if current is None and ready_queue:
@@ -70,7 +70,7 @@ def sjf(procs, context_switch_cost):
             current = min(ready_queue, key=lambda x: x.burst_time)
             ready_queue.remove(current)
             current_remaining = current.burst_time
-            timeline.add_to_timeline(Timepoint(current.pid, time,  None))
+            timeline.add_to_timeline(Timepoint(current.pid, time,  time, current.arrival_time))
             continue
 
         time += 1
