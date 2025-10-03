@@ -21,12 +21,9 @@ def main(json):
     for result in results_rr:
         metricas.adicionar(f"RR - {result.quantum}", result)
 
-    # metricas.plot_tempos_espera()
-    # metricas.plot_tempos_retorno()
-    # metricas.plot_vazao()
-    # metricas.plot_tempos_espera()
-    # metricas.plot_tempos_retorno()
-    # metricas.plot_vazao()
+    metricas.plot_tempos_espera()
+    metricas.plot_tempos_retorno()
+    metricas.plot_vazao()
 
     results_fcfs.plot_gantt_classic()
     results_sjf.plot_gantt_classic()
@@ -38,5 +35,5 @@ def main(json):
 
 main("c.json")
 main("d.json")
-main("e.json")
-main("f.json")
+# main("e.json")
+# main("f.json")
