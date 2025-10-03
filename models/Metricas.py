@@ -18,8 +18,18 @@ class Metrica:
         self._calculate_metrics()
 
         # Vazão: apenas Timepoints de processos válidos
-        self.concluidos = sum(
-            1 for tp in self.timeline if tp.end <= self.tempo_vazao and tp.pid is not None and tp.arrival is not None)
+        # self.concluidos = sum(
+        #     1 for tp in self.timeline if tp.end <= self.tempo_vazao and tp.pid is not None and tp.arrival is not None)
+        # self.vazao = self.concluidos / self.tempo_vazao if self.tempo_vazao > 0 else 0
+
+        completion_by_pid = {}
+        for tp in self.timeline:
+            if tp.pid is None or tp.arrival is None:
+                continue
+            completion_by_pid[tp.pid] = max(completion_by_pid.get(tp.pid, -float('inf')), tp.end)
+
+        completed_pids = [pid for pid, comp in completion_by_pid.items() if comp <= self.tempo_vazao]
+        self.concluidos = len(completed_pids)
         self.vazao = self.concluidos / self.tempo_vazao if self.tempo_vazao > 0 else 0
 
     def _calculate_metrics(self):
