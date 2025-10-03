@@ -107,31 +107,40 @@ class Metricas:
         nomes = [m.nome_algoritmo for m in self.metricas]
         valores = [m.tempo_medio_espera for m in self.metricas]
 
-        plt.bar(nomes, valores, color="skyblue")
+        bars = plt.bar(nomes, valores, color="skyblue")
         plt.title("Tempo Médio de Espera")
         plt.ylabel("Tempo")
         plt.xlabel("Algoritmos")
+
+        # adiciona rótulos no topo
+        plt.bar_label(bars, fmt="%.2f", padding=3)
+
         plt.savefig("./graficos/tempos_espera")
         plt.show()
+
 
     def plot_tempos_retorno(self):
         nomes = [m.nome_algoritmo for m in self.metricas]
         valores = [m.tempo_medio_retorno for m in self.metricas]
 
-        plt.bar(nomes, valores, color="orange")
+        bars = plt.bar(nomes, valores, color="orange")
         plt.title("Tempo Médio de Retorno")
         plt.ylabel("Tempo")
         plt.xlabel("Algoritmos")
+        plt.bar_label(bars, fmt="%.2f", padding=3)
+        plt.savefig("./graficos/tempo_retorno")
         plt.show()
 
     def plot_vazao(self):
         nomes = [m.nome_algoritmo for m in self.metricas]
         valores = [m.vazao for m in self.metricas]
 
-        plt.bar(nomes, valores, color="green")
+        bars = plt.bar(nomes, valores, color="green")
         plt.title("Vazão")
         plt.ylabel("Processos por unidade de tempo")
         plt.xlabel("Algoritmos")
+        plt.bar_label(bars, fmt="%.3f", padding=3)
+        plt.savefig("./graficos/vazao")
         plt.show()
 
     def plot_todos(self):
@@ -144,17 +153,21 @@ class Metricas:
 
         fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
-        axes[0].bar(nomes, espera, color="skyblue")
+        bars1 = axes[0].bar(nomes, espera, color="skyblue")
         axes[0].set_title("Tempo Médio de Espera")
         axes[0].set_ylabel("Tempo")
+        axes[0].bar_label(bars1, fmt="%.2f", padding=3)
 
-        axes[1].bar(nomes, retorno, color="orange")
+        bars2 = axes[1].bar(nomes, retorno, color="orange")
         axes[1].set_title("Tempo Médio de Retorno")
         axes[1].set_ylabel("Tempo")
+        axes[1].bar_label(bars2, fmt="%.2f", padding=3)
 
-        axes[2].bar(nomes, vazao, color="green")
+        bars3 = axes[2].bar(nomes, vazao, color="green")
         axes[2].set_title("Vazão")
         axes[2].set_ylabel("Processos por unidade de tempo")
+        axes[2].bar_label(bars3, fmt="%.3f", padding=3)
 
         plt.tight_layout()
+        plt.savefig("./graficos/tres_metricas_juntas")
         plt.show()

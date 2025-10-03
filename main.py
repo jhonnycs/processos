@@ -30,6 +30,7 @@ def main(json):
     metricas.plot_tempos_espera()
     metricas.plot_tempos_retorno()
     metricas.plot_vazao()
+    metricas.plot_todos()
 
 main("c.json")
 #main("d.json")
